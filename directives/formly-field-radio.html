@@ -7,9 +7,10 @@
 		 ng-repeat="(key, option) in options.options">
 		<label>
 			<input type="radio"
-				   name="{{id}}"
+				   name="{{options.key}}"
 				   id="{{id + '_'+ $index}}"
 				   ng-value="option.value"
+				   ng-required="options.required"
 				   ng-model="$parent.value">
 			{{option.name}}
 		</label>

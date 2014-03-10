@@ -1,13 +1,14 @@
 <div class="form-group">
-	<label for="{{id}}">
+	<label for="{{options.key}}">
 		{{options.label || 'Select'}}
 		{{options.required ? '*' : ''}}
 	</label>
 	<select class="form-control"
-			id="{{id}}"
+			id="{{options.key}}"
 			ng-model="value"
 			ng-required="options.required"
 			ng-disabled="options.disabled"
+			ng-init="value = options.options[options.default]"
 			ng-options="option.name group by option.group for option in options.options">
 	</select>
 </div>
