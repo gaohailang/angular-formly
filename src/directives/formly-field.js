@@ -3,61 +3,48 @@ angular.module('formly.render')
     .directive('formlyField', function formlyField($http, $compile, $templateCache) {
 
         var getTemplateUrl = function(type) {
-            var templateUrl = '';
-
-            switch (type) {
-                case 'textarea':
-                    templateUrl = 'directives/formly-field-textarea.html';
-                    break;
-                case 'radio':
-                    templateUrl = 'directives/formly-field-radio.html';
-                    break;
-                case 'select':
-                    templateUrl = 'directives/formly-field-select.html';
-                    break;
-                case 'number':
-                    templateUrl = 'directives/formly-field-number.html';
-                    break;
-                case 'checkbox':
-                    templateUrl = 'directives/formly-field-checkbox.html';
-                    break;
-                case 'password':
-                    templateUrl = 'directives/formly-field-password.html';
-                    break;
-                case 'hidden':
-                    templateUrl = 'directives/formly-field-hidden.html';
-                    break;
-                case 'email':
-                    templateUrl = 'directives/formly-field-email.html';
-                    break;
-                case 'text':
-                    templateUrl = 'directives/formly-field-text.html';
-                    break;
-                default:
-                    templateUrl = null;
-                    break;
-            }
-
+            var templateUrl = 'directives/formly-field-email.html';
             return templateUrl;
         };
 
         return {
             restrict: 'AE',
-            transclude: true,
-            scope: {
-                optionsData: '&options',
-                formId: '@formId',
-                index: '@index',
-                value: '=formValue'
-            },
+            replace: true,
+            scope: false,
             link: function fieldLink($scope, $element, $attr) {
+                $scope.options = $scope.$eval($attr.options);
+                if ($scope.options.referTpl) {
+                    $element.html(document.querySelector($scope.options.referTpl).innerHTML);
+                    $compile($element.contents())($scope);
+                    return;
+                }
                 var templateUrl = getTemplateUrl($scope.options.type);
+                var $input, $msg;
                 if (templateUrl) {
                     $http.get(templateUrl, {
                         cache: $templateCache
                     }).success(function(data) {
                         //template data returned
                         $element.html(data);
+                        $input = $element.find($scope.options.type)[0] ? $element.find($scope.options.type)[0] : $element.find('input')[0];
+                        $msg = $element.find('div')[1];
+                        $input.setAttribute('ng-model', $scope.$parent.options.key + '.' + $scope.options.key);
+                        $input.setAttribute('name', $scope.options.key);
+                        if ($input && $scope.options.validate) {
+                            angular.forEach($scope.options.validate, function(val, key) {
+                                $input.setAttribute('ng-' + key, val);
+                            });
+                        }
+                        if ($msg && $scope.options.msg) {
+                            angular.forEach($scope.options.msg, function(val, key) {
+                                $msg.setAttribute(key, val);
+                            });
+                        }
+                        if ($input && $scope.options.attr) {
+                            angular.forEach($scope.options.attr, function(val, key) {
+                                $input.setAttribute(key, val);
+                            });
+                        }
                         $compile($element.contents())($scope);
                     });
                 } else {
@@ -65,6 +52,7 @@ angular.module('formly.render')
                 }
             },
             controller: function fieldController($scope) {
+                return;
                 $scope.options = $scope.optionsData();
                 if ($scope.options.
                     default) {
