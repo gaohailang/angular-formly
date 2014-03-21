@@ -120,6 +120,10 @@ app.controller('home', function($scope, $parse, $rootScope) {
         key: 'autoNgform',
         submitCopy: 'Save'
     };
+
+    $scope.submitHandler = function() {
+        $scope.submittedData = $scope.autoNgform;
+    };
     $scope.submittedData = null;
     $scope.formData = {};
     $scope.formFieldsStr = $scope.toPrettyJSON($scope.formFields, 4);
