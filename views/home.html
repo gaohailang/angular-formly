@@ -1,71 +1,132 @@
 <div class="jumbotron">
-	<div class="container">
-		<h1>Formly for Angular</h1>
-		<p>JSON powered forms</p>
-	</div>
+    <div class="container">
+        <h1>Formly for Angular</h1>
+        <p>JSON powered forms</p>
+    </div>
 </div>
 <div class="container">
-	<div class="row">
-		<div class="col-sm-4 col-md-4 col-lg-4"
-			 ng-hide="editJSON">
+    <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4"
+             ng-hide="editJSON">
 
-			<!-- Formatted JSON -->
-			<button class="btn btn-success"
-					ng-click="editJSON = true">
-				Edit JSON
-			</button>
+            <!-- Formatted JSON -->
+            <button class="btn btn-success"
+                    ng-click="editJSON = true">
+                Edit JSON
+            </button>
 
-			<h3>Options</h3>
-			<div source="toPrettyJSON(formOptions, 4)"
-				 hljs>
-			</div>
+            <h3>Options</h3>
+            <div source="toPrettyJSON(formOptions, 4)"
+                 hljs>
+            </div>
 
-			<h3>Fields</h3>
-			<div source="toPrettyJSON(formFields, 4)"
-				 hljs>
-			 </div>
-		</div>
+            <h3>Fields</h3>
+            <div source="toPrettyJSON(formFields, 4)"
+                 hljs>
+             </div>
+        </div>
 
-		<div class="col-sm-4 col-md-4 col-lg-4"
-			 ng-show="editJSON">
+        <div class="col-sm-4 col-md-4 col-lg-4"
+             ng-show="editJSON">
 
-			<!-- Edit JSON -->
-			<button class="btn btn-success"
-					ng-click="editJSON = false">
-				Pretty JSON
-			</button>
+            <!-- Edit JSON -->
+            <button class="btn btn-success"
+                    ng-click="editJSON = false">
+                Pretty JSON
+            </button>
 
-			<h3>Options</h3>
-			<div class="form-group"
-				 ng-class="{'has-error': formOptionsError}">
-				<textarea class="form-control"
-						  ng-model="formOptionsStr"
-						  rows="5">
-				</textarea>
-			</div>
+            <h3>Options</h3>
+            <div class="form-group"
+                 ng-class="{'has-error': formOptionsError}">
+                <textarea class="form-control"
+                          ng-model="formOptionsStr"
+                          rows="5">
+                </textarea>
+            </div>
 
-			<h3>Fields</h3>
-			<div class="form-group"
-				 ng-class="{'has-error': formFieldsError}">
-				<textarea class="form-control"
-						  ng-model="formFieldsStr"
-						  rows="15">
-				</textarea>
-			</div>
-		</div>
-		<div class="col-sm-4 col-md-4 col-lg-4">
+            <h3>Fields</h3>
+            <div class="form-group"
+                 ng-class="{'has-error': formFieldsError}">
+                <textarea class="form-control"
+                          ng-model="formFieldsStr"
+                          rows="15">
+                </textarea>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
 
-			<h3>Form</h3>
-			<formly-form result="formData"
-						 fields="formFields"
-						 options="formOptions"
-						 ng-submit="onSubmit()">
-			</formly-form>
-		</div>
-		<div class="col-sm-4 col-md-4 col-lg-4">
+            <h3>Form</h3>
+            <formly-form fields="formFields" name="ngSimpleForm"
+                options="formOptions"
+                ng-submit="onSubmit()">
+            </formly-form>
 
-			<h3>Submitted Data</h3>
-			<div hljs source="toPrettyJSON(submittedData, 4)"></div>
-		</div>
-	</div>
+            <script type="text/ng-template" id="input-extra-diy">
+                <div class="pmt-form-row" ng-init="autoNgform.paidType='NONE'">
+                    <label for="" class="pmt-form-label">收费内容</label>
+                    <div class="pmt-form-controls" ng-init="checkboxOpts=[{key: 'NONE',val: '没有收费内容'}, {key:'HIDE', val: '这个应用是试用版，付费后才能使用完整功能'}]">
+                        <div class="pmt-form-checkbox" ng-repeat="opt in checkboxOpts">
+                            <label>
+                                <input type="radio" name="paidType" value="{{opt.key}}" ng-model="autoNgform.paidType">
+                                {{opt.val}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </script>
+
+            <script type="text/ng-template" id="input-extra-watch">
+                <div class="pmt-form-row">
+                    <label for="publishDate" class="pmt-form-label">发布时间</label>
+                    <div class="pmt-form-controls">
+                        <select ng-model="$root.publishDateSelect" ng-init="$root.publishDateSelect='a'">
+                            <option value="a">审核通过后立即发布</option>
+                            <option value="b">定时发布</option>
+                        </select>
+                        <div ng-show="$root.publishDateSelect == 'b'" style="display: inline-block;">
+                            <input
+                                name="publishDate"
+                                type="text" pmt-date-picker
+                                picker="{timepicker: true, format: 'Y/m/d H:i', minDate: tmpTwoDay}"
+                                ng-model="autoNgform.publishDate">
+                        </div>
+                    </div>
+                </div>
+            </script>
+
+
+            <script type="text/ng-template" id="input-extra-uploader">
+                <div class="pmt-form-row">
+                    <div inputfield labeltext="税务登记证复印件" labelfor="taxReg" ng-if="$root.publishDateSelect === 'b'">
+                        <div class="pmt-input-filewrap">
+                            <button pmt-upload-button class="w-btn pmt-upload-btn"
+                                endpoint='autoNgform.taxReg' pmt-file-upload-field>
+                            上传税务登记证复印件</button>
+                            <input type="text" class='hide'
+                                id="taxReg" name="taxReg"
+                                required ng-model="autoNgform.taxReg">
+                            <img ng-src="{{ $root.vm.taxRegPreview }}">
+                            <span class="w-text-warning">{{ $root.vm.taxRegWarning }}</span>
+                        </div>
+                        <div message
+                            for="taxReg"
+                            help="增值税一般纳税人请提供税务登记证复印件"></div>
+                    </div>
+                </div>
+            </script>
+
+
+            <h3>Form2</h3>
+            <form class="formly pmt-form pmt-form-horizontal" novalidate validate-submit="option.submitHandler()">
+                <!-- <formly-field options="formOptions[0]" class="formly-field">
+                </formly-field> -->
+            </form>
+        </div>
+
+        <div class="col-sm-4 col-md-4 col-lg-4">
+
+            <h3>Submitted Data</h3>
+            <div hljs source="toPrettyJSON(submittedData, 4)"></div>
+        </div>
+    </div>
 </div>

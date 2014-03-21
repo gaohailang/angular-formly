@@ -1,0 +1,80 @@
+
+<!-- radio -->
+<div class="radio-group">
+    <label class="control-label">
+        {{options.label}}
+        {{options.required ? '*' : ''}}
+    </label>
+    <div class="radio"
+         ng-repeat="(key, option) in options.options">
+        <label>
+            <input type="radio"
+                   name="{{options.key}}"
+                   id="{{id + '_'+ $index}}"
+                   ng-value="option.value"
+                   ng-required="options.required"
+                   ng-model="$parent.value">
+            {{option.name}}
+        </label>
+    </div>
+</div>
+
+<!-- checkbox -->
+<div class="checkbox">
+    <label>
+        <input type="checkbox"
+               ng-required="options.required"
+               ng-disabled="options.disabled"
+               ng-model="value">
+        {{options.label || 'Checkbox'}}
+        {{options.required ? '*' : ''}}
+    </label>
+</div>
+
+<!-- select -->
+<div class="form-group">
+    <label for="{{options.key}}">
+        {{options.label || 'Select'}}
+        {{options.required ? '*' : ''}}
+    </label>
+    <select class="form-control"
+            id="{{options.key}}"
+            ng-model="value"
+            ng-required="options.required"
+            ng-disabled="options.disabled"
+            ng-init="value = options.options[options.default]"
+            ng-options="option.name group by option.group for option in options.options">
+    </select>
+</div>
+
+<!-- input [password, number, email] -->
+<div class="form-group">
+    <label for="{{options.key}}">
+        {{options.label || 'Text'}}
+        {{options.required ? '*' : ''}}
+    </label>
+    <input type="text"
+           class="form-control"
+           id="{{options.key}}"
+           placeholder="{{options.placeholder}}"
+           ng-required="options.required"
+           ng-disabled="options.disabled"
+           ng-model="value">
+</div>
+
+<!-- textarea -->
+<div class="form-group">
+    <label for="{{options.key}}">
+        {{options.label || 'Text'}}
+        {{options.required ? '*' : ''}}
+    </label>
+    <textarea type="text"
+              class="form-control"
+              id="{{options.key}}"
+              rows="{{options.lines}}"
+              placeholder="{{options.placeholder}}"
+              ng-required="options.required"
+              ng-disabled="options.disabled"
+              ng-model="value">
+    </textarea>
+</div>

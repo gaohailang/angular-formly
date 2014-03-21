@@ -1,0 +1,222 @@
+.pmt-form>:last-child {
+    margin-bottom: 0
+}
+
+.pmt-form select,.pmt-form textarea,.pmt-form input[type=text],.pmt-form input[type=password],.pmt-form input[type=datetime],.pmt-form input[type=datetime-local],.pmt-form input[type=date],.pmt-form input[type=month],.pmt-form input[type=time],.pmt-form input[type=week],.pmt-form input[type=number],.pmt-form input[type=email],.pmt-form input[type=url],.pmt-form input[type=search],.pmt-form input[type=tel],.pmt-form input[type=color] {
+    height: 30px;
+    max-width: 100%;
+    padding: 4px 6px;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #444;
+    -webkit-transition: all linear .2s;
+    transition: all linear .2s;
+    border-radius: 4px
+}
+
+.pmt-form select:focus,.pmt-form textarea:focus,.pmt-form input[type=text]:focus,.pmt-form input[type=password]:focus,.pmt-form input[type=datetime]:focus,.pmt-form input[type=datetime-local]:focus,.pmt-form input[type=date]:focus,.pmt-form input[type=month]:focus,.pmt-form input[type=time]:focus,.pmt-form input[type=week]:focus,.pmt-form input[type=number]:focus,.pmt-form input[type=email]:focus,.pmt-form input[type=url]:focus,.pmt-form input[type=search]:focus,.pmt-form input[type=tel]:focus,.pmt-form input[type=color]:focus {
+    border-color: #99baca;
+    outline: 0;
+    background: #f5fbfe;
+    color: #444
+}
+
+.pmt-form select:disabled,.pmt-form textarea:disabled,.pmt-form input[type=text]:disabled,.pmt-form input[type=password]:disabled,.pmt-form input[type=datetime]:disabled,.pmt-form input[type=datetime-local]:disabled,.pmt-form input[type=date]:disabled,.pmt-form input[type=month]:disabled,.pmt-form input[type=time]:disabled,.pmt-form input[type=week]:disabled,.pmt-form input[type=number]:disabled,.pmt-form input[type=email]:disabled,.pmt-form input[type=url]:disabled,.pmt-form input[type=search]:disabled,.pmt-form input[type=tel]:disabled,.pmt-form input[type=color]:disabled {
+    border-color: #ddd;
+    background-color: #fafafa;
+    color: #999
+}
+
+.pmt-form :-ms-input-placeholder {
+    color: #999!important
+}
+
+.pmt-form ::-moz-placeholder {
+    color: #999
+}
+
+.pmt-form ::-webkit-input-placeholder {
+    color: #999
+}
+
+.pmt-form :disabled:-ms-input-placeholder {
+    color: #999!important
+}
+
+.pmt-form :disabled::-moz-placeholder {
+    color: #999
+}
+
+.pmt-form :disabled::-webkit-input-placeholder {
+    color: #999
+}
+
+.pmt-form legend {
+    width: 100%;
+    padding-bottom: 15px;
+    font-size: 18px;
+    line-height: 30px
+}
+
+.pmt-form legend:after {
+    content: "";
+    display: block;
+    margin-bottom: 10px
+}
+
+.pmt-form-small {
+    height: 25px!important;
+    padding: 3px 3px!important;
+    font-size: 12px
+}
+
+.pmt-form-large {
+    height: 40px!important;
+    padding: 8px 6px!important;
+    font-size: 16px
+}
+
+.pmt-form textarea,.pmt-form select[multiple],.pmt-form select[size] {
+    height: auto
+}
+
+.pmt-form-danger,.pmt-form input[type=text].ng-dirty.ng-invalid {
+    border: 2px solid #f24949!important;
+    background: #fff!important
+}
+
+.pmt-form-success {
+    border-color: #8ec73b!important;
+    background: #fafff2!important;
+    color: #539022!important
+}
+
+.pmt-form-blank {
+    border: 0!important;
+    background: none!important;
+    box-shadow: none!important;
+    outline: 1px dashed transparent!important
+}
+
+.pmt-form-blank:focus {
+    outline-color: #ddd!important
+}
+
+input.pmt-form-width-mini {
+    width: 40px
+}
+
+select.pmt-form-width-mini {
+    width: 65px
+}
+
+.pmt-form-width-small {
+    width: 135px
+}
+
+.pmt-form-width-medium {
+    width: 200px
+}
+
+.pmt-form-width-large {
+    width: 300px
+}
+
+.pmt-form-row:before,.pmt-form-row:after {
+    content: " ";
+    display: table
+}
+
+.pmt-form-row:after {
+    clear: both
+}
+
+.pmt-form-row+.pmt-form-row {
+    margin-top: 15px
+}
+
+.pmt-form-help-inline {
+    display: inline-block;
+    margin: 0 0 0 10px
+}
+
+.pmt-form-help-block {
+    display: block;
+    margin: 5px 0 0
+}
+
+.pmt-form-controls-condensed {
+    margin: 5px 0
+}
+
+.pmt-form-stacked .pmt-form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700
+}
+
+.pmt-form-horizontal .pmt-form-label {
+    width: 100px;
+    margin-top: 5px;
+    float: left
+}
+
+.pmt-form-horizontal .pmt-form-controls {
+    margin-left: 110px
+}
+
+.pmt-form-horizontal .pmt-form-controls-text {
+    padding-top: 5px
+}
+
+.pmt-form-checkbox {
+    margin: 5px 0
+}
+
+.upload-photo {
+    max-width: 210px;
+    max-height: 140px
+}
+
+.up-field-extra {
+    display: inline-block;
+    vertical-align: middle
+}
+
+.pmt-upload-btn input {
+    width: 100%;
+    height: 100%
+}
+
+.pmt-form input[type=text][readonly] {
+    cursor: not-allowed;
+    background-color: #eee;
+    color: #999;
+    border-color: #ccc
+}
+
+.pmt-form input[type=text].ng-dirty.ng-valid {
+    position: relative
+}
+
+.pmt-form input[type=text].ng-dirty.ng-valid:after {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 0;
+    background-image: url(../images/icon-s7f55f3764a.png);
+    background-position: 0 -407px;
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    background-color: #3baa24
+}
+
+@media (-webkit-min-device-pixel-ratio:2),(-o-min-device-pixel-ratio:3 / 2),(min-device-pixel-ratio:2) {
+    .pmt-form input[type=text].ng-dirty.ng-valid:after {
+        background-image: url(../images/icon-2x-s985023d3c7.png);
+        background-size: 72px 440px;
+        background-position: 0 -385px
+    }
+}
