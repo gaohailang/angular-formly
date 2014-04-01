@@ -3,7 +3,7 @@ angular.module('formly.render')
     .directive('formlyField', function formlyField($http, $compile, $templateCache) {
 
         var getTemplateUrl = function(type) {
-            var templateUrl = 'directives/formly-field-email.html';
+            var templateUrl = 'directives/formly-field.html';
             return templateUrl;
         };
 
